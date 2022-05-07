@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>DZ Pieces</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="static/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+
+        <div class="row align-items-center py-3 px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a href="{% url 'home' %}" class="text-decoration-none" >
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">DZ</span>Pieces</h1>
+                </a>
+            </div>
+            <div class="col-lg-6 col-6 text-left">
+              <form method="GET" action=".">
+                  									{% csrf_token %}
+
+                                    {% if form.errors %}
+									{% for error in form.errors %}
+									{{ error }}
+									{% endfor %}
+									{% endif %}
+                    <div class="input-group">
+                        <input type="text" name="name" class="form-control" placeholder="Chercher des products">
+                        <div class="input-group-append">
+
+                            <button class="input-group-text bg-transparent text-primary" type="submit">
+                                <i  class="fa fa-search"></i>
+                            </button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-3 col-6 text-right">
+                {% if request.user.is_authenticated %}
+                 <a href="{% url 'login' %}" class="btn border">
+                    <i class="fas fa-user text-primary"></i>
+                    <span class="badge">{{request.user}}</span>
+                </a>
+
+                <a href="{% url 'logout' %}" class="btn border">
+                    <i class="fas fa-check text-primary"></i>
+                    <span class="badge">Déconnexion</span>
+                </a>
+                {% else %}
+                 <a href="{% url 'login' %}" class="btn border">
+                    <i class="fas fa-user text-primary"></i>
+                    <span class="badge">Connexion</span>
+                </a>
+                <a href="{% url 'register' %}" class="btn border">
+                    <i class="fas fa-check text-primary"></i>
+                    <span class="badge">S'inscrire</span>
+                </a>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid mb-5">
+        <div class="row border-top px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                    <h6 class="m-0">Catégories</h6>
+                    <i class="fa fa-angle-down text-dark"></i>
+                </a>
+                <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
+                    <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
+                        {% for cat in catalogues %}
+                        <a href="{% url 'shopitem' cat.id %}" class="nav-item nav-link">{{cat.title}}</a>
+                        {% endfor %}
+
+
+                    </div>
+                </nav>
+            </div>
+            <div class="col-lg-9">
+                <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                    <a href="" class="text-decoration-none d-block d-lg-none">
+                        <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+                    </a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto py-0">
+                            <a href="{% url 'home'%}" class="nav-item nav-link active">Accueil</a>
+                            <a href="{% url 'shop'%}" class="nav-item nav-link">Boutique</a>
+                            <a href="{% url 'brands'%}" class="nav-item nav-link">Marques</a>
+                            <a href="{% url 'catalogues'%}" class="nav-item nav-link">Catégories</a>
+
+
+                        </div>
+                        {% if request.user.is_authenticated %}
+
+                         <div class="navbar-nav ml-auto py-0">
+                            <a href="{% url 'addproduct' %}" class="btn border">
+                                <i class="fas fa-plus text-primary"></i>
+                                <span class="badge">Publier une annonce</span>
+                            </a>
+
+                            <a href="{% url 'articlesarticles' %}" class="btn border">
+                                <i class="fas fa-th-list  text-primary"></i>
+                                <span class="badge">Mes Articles</span>
+                            </a>
+                             <a href="{% url 'offrepage' %}" class="btn border">
+                                <i class="fas fa-th-list  text-primary"></i>
+                                <span class="badge"> Offres Envoyées</span>
+                            </a>
+                            <a href="{% url 'offres' %}" class="btn border">
+                                <i class="fas fa-inbox text-primary"></i>
+                                <span class="badge">Offres Réçus</span>
+                            </a>
+                        </div>
+                        {% else %}
+                         <div class="navbar-nav ml-auto py-0">
+                            <a href="{% url 'addproduct' %}" class="btn border">
+                                <i class="fas fa-plus text-primary"></i>
+                                <span class="badge">Publier une annonce</span>
+                            </a>
+                        </div>
+                        {% endif %}
+
+
+                    </div>
+                </nav>
+                <div id="header-carousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="height: 410px;">
+                            <img class="img-fluid" src="static/img/back2.jpg" alt="Image">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                <div class="p-3" style="max-width: 700px;">
+                                    <h4 class="text-light text-uppercase font-weight-medium mb-3">Vendez vos produits et montrez votre article ici</h4>
+                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4"> Montrez votre marchandise</h3>
+                                    <a href="" class="btn btn-light py-2 px-3">Publier votre produit </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item" style="height: 410px;">
+                            <img class="img-fluid" src="static/img/back1.png" alt="Image">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                <div class="p-3" style="max-width: 700px;">
+                                    <h4 class="text-light text-uppercase font-weight-medium mb-3">Voire les différentes offres et contacter nos clients</h4>
+                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">Prix raisonnable</h3>
+                                    <a href="" class="btn btn-light py-2 px-3">Consulter la boutique</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+                        <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                            <span class="carousel-control-prev-icon mb-n2"></span>
+                        </div>
+                    </a>
+                    <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+                        <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                            <span class="carousel-control-next-icon mb-n2"></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Featured Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5 pb-3">
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
+                    <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
+                    <h5 class="font-weight-semi-bold m-0">Produit de qualité</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
+                    <h1 class="fa fa-lock text-primary m-0 mr-2"></h1>
+                    <h5 class="font-weight-semi-bold m-0">Confiance</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
+                    <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
+                    <h5 class="font-weight-semi-bold m-0">Meilleur Offre</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
+                    <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
+                    <h5 class="font-weight-semi-bold m-0">Assistance 24h/24</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Featured End -->
+
+
+    <!-- Categories Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5 pb-3">
+            {% for cat in catalogues %}
+            <div class="col-lg-4 col-md-6 pb-1">
+                <div class="cat-item d-flex flex-column border mb-4"  style="padding: 30px;">
+                    <p class="text-right">{{cat.get_total}} Products</p>
+                    <a href="{% url 'shopitem' cat.id %}" class="cat-img position-relative overflow-hidden mb-3">
+                        <img class="img-fluid" src="{{cat.image.url}}"  alt="">
+                    </a>
+                    <h5 class="font-weight-semi-bold m-0"  >{{cat.title}}</h5>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    <!-- Categories End -->
+
+
+    <!-- Offer Start -->
+    <div class="container-fluid offer pt-5">
+        <div class="row px-xl-5">
+            <div class="col-md-6 pb-4">
+                <div class="position-relative bg-secondary text-center text-md-right text-white mb-2 py-5 px-5">
+                    <img src="static/img/cors.png" alt="">
+                    <div class="position-relative" style="z-index: 1;">
+                        <h5 class="text-uppercase text-primary mb-3">+500 articles </h5>
+                        <h1 class="mb-4 font-weight-semi-bold">Divers pièces détachées </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 pb-4">
+                <div class="position-relative bg-secondary text-center text-md-left text-white mb-2 py-5 px-5">
+                    <img src="static/img/cor.png" alt="">
+                    <div class="position-relative" style="z-index: 1;">
+                        <h5 class="text-uppercase text-primary mb-3">+25 Marques </h5>
+                        <h1 class="mb-4 font-weight-semi-bold"> Marques mondiale </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Offer End -->
+
+
+    <!-- Products Start -->
+    <div class="container-fluid pt-5">
+        <div class="text-center mb-4">
+            <h2 class="section-title px-5"><span class="px-2">Récemment Ajoutés</span></h2>
+        </div>
+        <div class="row px-xl-5 pb-3">
+            {% for product in products %}
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <a href="{% url 'productdetail' product.id %}" >
+                <div class="card product-item border-0 mb-4">
+                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                        <img class="img-fluid w-100"  src="{{product.imageURL}}"   alt="">
+                    </div>
+                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                        <h6 class="text-truncate mb-3">{{product.name}}</h6>
+                        <div class="d-flex justify-content-center">
+                            <h6>{{product.price}} DA</h6>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between bg-light border">
+                        <a href="{% url 'productdetail' product.id %}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Voire plus de  Details</a>
+                        <a href="{% url 'offredetail' product.id %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Offre</a>
+                    </div>
+                </div>
+                    </a>
+            </div>
+        {% endfor  %}
+
+
+
+        </div>
+    </div>
+    <!-- Products End -->
+
+
+    <!-- Subscribe Start -->
+    <div class="container-fluid bg-secondary my-5">
+        <div class="row justify-content-md-center py-5 px-xl-5">
+            <div class="col-md-6 col-12 py-5">
+                <div class="text-center mb-2 pb-2">
+                    <h2 class="section-title px-5 mb-3"><span class="bg-secondary px-2">Marques</span></h2>
+                </div>
+
+        </div>
+    </div>
+    <!-- Subscribe End -->
+
+
+
+
+    <!-- Vendor Start -->
+    <div class="container-fluid py-5">
+        <div class="row px-xl-5">
+            <div class="col">
+                <div class="owl-carousel vendor-carousel">
+                    {% for brand in brands %}
+                    <div class="vendor-item border p-4">
+                        <img src="{{brand.image}}" alt="">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Vendor End -->
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
+        <div class="row px-xl-5 pt-5">
+            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+                <a href="" class="text-decoration-none">
+                    <h1 class="mb-4 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border border-white px-3 mr-1">DZ</span>Pieces</h1>
+                </a>
+                <p>L'utilisation de ce site Internet implique l'acceptation des Conditions générales et du règlement sur le Respect de la vie privée.</p>
+                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Annaba , Algérie</p>
+                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-dark mb-4">Liens rapides</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-dark mb-2" href="{% url 'home' %}"><i class="fa fa-angle-right mr-2"></i>Accueil</a>
+                            <a class="text-dark mb-2" href="{% url 'shop' %}"><i class="fa fa-angle-right mr-2"></i>Boutique</a>
+                            <a class="text-dark" href=""><i class="fa fa-angle-right mr-2"></i>Contactez-nous</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-dark mb-4">Liens rapides </h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-dark mb-2" href="{% url 'brands' %}"><i class="fa fa-angle-right mr-2"></i>Marques</a>
+                            <a class="text-dark mb-2" href="{% url 'catalogues' %}"><i class="fa fa-angle-right mr-2"></i>Catalogues</a>
+                            <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Profil</a>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-dark mb-4">Contactez-nous</h5>
+                        <form action="">
+                            <div class="form-group">
+                                <input type="email" class="form-control border-0 py-4" placeholder="Votre Mail" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control border-0 py-4" placeholder="Votre Message" required="required" />
+                            </div>
+                            <div>
+                                <button class="btn btn-primary btn-block border-0 py-3" type="submit">Envoyer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="static/lib/easing/easing.min.js"></script>
+    <script src="static/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="static/mail/jqBootstrapValidation.min.js"></script>
+    <script src="static/mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="static/js/main.js"></script>
+</body>
+
+</html>

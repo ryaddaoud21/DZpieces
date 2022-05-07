@@ -1,0 +1,133 @@
+{% extends "Shop/Main.html" %}
+{% block content %}
+
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Conversation </h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Acceuil</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">conversation </p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+    <div class="container-fluid pt-5">
+        <div class="text-center mb-4">
+            <h2 class="section-title px-5"><span class="px-2">{{offer.produit.by}}</span></h2>
+        </div>
+        <div class="row px-xl-5">
+            <div class="col-lg-5 mb-5">
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold center m-0">Discussions</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="font-weight-medium mb-3">Utilisateurs</h5>
+                        <hr class="mt-2">
+
+                        {% for message in offer.conversationmessages.all %}
+                        {% if message.created_by == request.user %}
+                        <div class="d-flex justify-content-between">
+                            <p>{{message.offer.created_by}} / {{message.offer.produit}} </p>
+                        <a href="" class="btn border">
+
+                    <i class="fas fa-inbox text-primary"></i>
+                </a>                        </div>
+                        <hr class="mt-2">
+
+                        {% endif%}
+                        {% endfor%}
+                        <hr class="mt-2">
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+            <div class="col-lg-7 mb-5">
+                <div class="contact-form">
+                    <div id="success"></div>
+
+
+                    {% for message in offer.conversationmessages.all %}
+                    {% if message.created_by == request.user %}
+                        <div class="control-group">
+                                    <b style="">{{ message.created_by.username }}</b> - <p style=" font-weight: 200;font-size: 0.8rem;"> Il y'a {{ message.created_at|timesince }} </p> <br>
+                                    <b style="display: block;
+                                    width: 100%;
+                                    height: calc(1.5em + 0.75rem + 0px);
+                                    padding: 0.375rem 0.75rem;
+                                    font-size: 1rem;
+                                    font-weight: 300;
+                                    line-height: 1.5;
+                                    color: #495057;
+                                    background-color: #e2e2e2;
+                                    background-clip: padding-box;
+                                    border: 1px solid #EDF1FF;
+                                    border-radius: 0;
+                                    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;">{{ message.content }}</b>  <br>
+
+                        </div>
+                    {% elif not message.created_by == request.user %}
+
+                    <div class="control-group">
+                                <b style="">{{ message.created_by.username }}</b> - <p style=" font-weight: 200;font-size: 0.8rem;"> Il y'a {{ message.created_at|timesince }} </p> <br>
+                                <b style="display: block;
+                                width: 100%;
+                                height: calc(1.5em + 0.75rem + 0px);
+                                padding: 0.375rem 0.75rem;
+                                font-size: 1rem;
+                                font-weight: 300;
+                                line-height: 1.5;
+                                color: #495057;
+                                background-color: #e9f1fa;
+                                background-clip: padding-box;
+                                border: 1px solid #EDF1FF;
+                                border-radius: 0;
+                                transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;">{{ message.content }}</b>  <br>
+
+
+                    </div>
+                    {% endif %}
+
+                                {% empty %}
+                    <p>No messages yet...</p>
+
+                    <hr>
+                {% endfor %}
+
+
+
+                     <form  action="." method="post" novalidate="novalidate">
+                     {% csrf_token %}
+
+                        <div class="control-group">
+                            <textarea class="form-control" name="content" rows="6" id="message" placeholder="Message"
+                                required="required"
+                                data-validation-required-message="Please enter your message"></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Envoyer Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+    </div>
+
+
+    <!-- Cart Start -->
+
+
+
+
+
+    <!-- Footer End -->
+
+{% endblock%}

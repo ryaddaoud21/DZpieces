@@ -1,0 +1,35 @@
+{% extends "Shop/Main.html" %}
+
+{% block content %}
+
+ <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Catégories</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Acceuil</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Catégories</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5 pb-3">
+            {% for cat in catalogues %}
+            <div class="col-lg-4 col-md-6 pb-1">
+                <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+                    <p class="text-right"> {{cat.get_total}}Products</p>
+                    <a href="{% url 'shopitem' cat.id %}" class="cat-img position-relative overflow-hidden mb-3">
+                        <img class="img-fluid" src="{{cat.image.url}}"   alt="">
+                    </a>
+                    <h5 class="font-weight-semi-bold m-0">{{cat.title}}</h5>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock content %}

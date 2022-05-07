@@ -1,0 +1,70 @@
+{% extends "Shop/Main.html" %}
+
+{% block content %}
+
+  <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Signin</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Signin</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid pt-5">
+        <div class="text-center mb-4">
+            <h2 class="section-title px-5"><span class="px-2">Register </span></h2>
+        </div>
+        <div class="row justify-content-md-center" style="    text-align: center;        ">
+            <div class="col-4 mb-5">
+                <div class="contact-form">
+                    <div id="success"></div>
+                    <form name="form2"  method="post"  >
+                       {% csrf_token%}
+                        <div class="control-group">
+                            <input type="text" class="form-control" id="name" placeholder="Nom d'utilisateur " required="required" name="username"  data-validation-required-message="entrer votre nom d'utilisateur" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+
+                        <div class="control-group">
+                            <input type="email" class="form-control" id="email" placeholder="Email " required="required"  name="email"  data-validation-required-message="entrer votre email" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="password" class="form-control" id="password1" placeholder="Motpass" required="required" name="password1"  data-validation-required-message="entrer votre mot de pass" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="password" class="form-control" id="password2" placeholder="Confirmer Motpass" required="required" name="password2" data-validation-required-message="confirmer votre nom d'utilisateur" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+
+                        <div>
+                            <button class="btn btn-primary py-2 px-4" type="submit" >S'identifier </button>
+                        </div>
+
+                        {% if messages %}
+                        <ul class="messages" style="font-size: large;
+    font-weight: 500;
+    margin-left: 7pc;
+    color:red;
+}">
+                            {% for message in messages %}
+                            <li {% if message.tags %} class=" {{ message.tags }} " {% endif %} > {{ message }} </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends "Shop/Main.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+ <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Publier Une Annonce</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Acceuil</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Publier Une Annonce</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Contact Start -->
+    <div class="container-fluid pt-5">
+        <div class="text-center mb-4">
+            <h2 class="section-title px-5"><span class="px-2">Voulez-vous vraiment supprimer : {{product.name}} ? </span></h2>
+        </div>
+        <div class="row justify-content-md-center" style="    text-align: center;        ">
+            <div class="col-4 mb-5">
+                <div class="contact-form">
+                    <div id="success"></div>
+                 <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="content">
+
+                    <input class="btn btn-danger py-2 px-4" type="submit" name="Confirm">
+                        <a class="btn btn-primary py-2 px-4" href="{% url 'articlesarticles' %}" > Annuler</a> </div>
+
+                    </div>
+                </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock content %}
