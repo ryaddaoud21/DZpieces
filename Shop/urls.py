@@ -12,9 +12,10 @@ urlpatterns = [
     path('brands/', brandspage, name='brands'),
     path('catalogues/', cataloguespage, name='catalogues'),
     path('shop/', boutiquepage, name='shop'),
-    path('^catalogue(?P<cata_id>\d+)$', Shopbycatalogue, name='shopitem'),
-    path('^catalogue(?P<brand_id>\d+)$', shopitembrand, name='shopitembrand'),
-    path('^product(?P<product_id>\d+)$', productdetail, name='productdetail'),
+    path('catalogue/<int:cata_id>/', Shopbycatalogue, name='shopitem'),
+
+    path('brand/<int:brand_id>/', shopitembrand, name='shopitembrand'),
+    path('product//<int:product_id>/', productdetail, name='productdetail'),
     path('<int:product_id>/offre/', offredetail, name='offredetail'),
 
     path('', homepage, name='home'),
@@ -22,6 +23,7 @@ urlpatterns = [
     path('offrepage_reçus/', offres, name='offres'),
     path('Myarticle/', articles, name='articlesarticles'),
     path('addproduct', addproduct, name='addproduct'),
+    path('Profil/', Profil, name='Profil'),
     path('Conversation/<int:offer_id>/', Conversation, name='Conversation'),
     path('<int:product_id>/modifier', Modifyproduct, name='Modifyproduct'),
     path('<int:product_id>/Supprimer', Deleteproduct, name='Deleteproduct'),

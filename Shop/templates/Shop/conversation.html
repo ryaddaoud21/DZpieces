@@ -30,6 +30,8 @@
                         {% for message in offer.conversationmessages.all %}
                         {% if message.created_by == request.user %}
                         <div class="d-flex justify-content-between">
+                            <span class="icon"><img width="35" src="https://i.postimg.cc/MnSTVw83/me.png"></span>
+
                             <p>{{message.offer.created_by}} / {{message.offer.produit}} </p>
                         <a href="" class="btn border">
 
@@ -37,8 +39,8 @@
                 </a>                        </div>
                         <hr class="mt-2">
 
-                        {% endif%}
-                        {% endfor%}
+                        {% endif %}
+                        {% endfor %}
                         <hr class="mt-2">
 
 
@@ -57,8 +59,18 @@
                     {% for message in offer.conversationmessages.all %}
                     {% if message.created_by == request.user %}
                         <div class="control-group">
-                                    <b style="">{{ message.created_by.username }}</b> - <p style=" font-weight: 200;font-size: 0.8rem;"> Il y'a {{ message.created_at|timesince }} </p> <br>
-                                    <b style="display: block;
+                            <div>
+                                {% for user in users %}
+                                {% if user.user == request.user %}
+                                 <span class="icon"><img style="float:left;  padding: 5px ;width: 45px " src="{{user.image.url}}"></span>
+                                {% endif %}
+                                {% endfor %}
+                                 <div>
+                                 <b>{{ message.created_by.username }}</b>  <br>  <p style=" font-weight: 200;font-size: 0.8rem;"> Il y'a {{ message.created_at|timesince }} </p> <br>
+                                 </div>
+                            </div>
+
+                                   <b style="display: block;
                                     width: 100%;
                                     height: calc(1.5em + 0.75rem + 0px);
                                     padding: 0.375rem 0.75rem;
@@ -76,20 +88,18 @@
                     {% elif not message.created_by == request.user %}
 
                     <div class="control-group">
-                                <b style="">{{ message.created_by.username }}</b> - <p style=" font-weight: 200;font-size: 0.8rem;"> Il y'a {{ message.created_at|timesince }} </p> <br>
-                                <b style="display: block;
-                                width: 100%;
-                                height: calc(1.5em + 0.75rem + 0px);
-                                padding: 0.375rem 0.75rem;
-                                font-size: 1rem;
-                                font-weight: 300;
-                                line-height: 1.5;
-                                color: #495057;
-                                background-color: #e9f1fa;
-                                background-clip: padding-box;
-                                border: 1px solid #EDF1FF;
-                                border-radius: 0;
-                                transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;">{{ message.content }}</b>  <br>
+                               <div>
+                                {% for user in users %}
+                                {% if user.user == message.created_by %}
+                                 <span class="icon"><img style="float:left;  padding: 5px ;width: 45px " src="{{user.image.url}}"></span>
+                                {% endif %}
+                               {% endfor %}
+
+                                 <span class="icon"><img style="float:left;  padding: 5px ;width: 45px " src="https://i.postimg.cc/PCQqM7XX/she.png"></span>
+                                 <div>
+                                 <b>{{ message.created_by.username }}</b>  <br>  <p style=" font-weight: 200;font-size: 0.8rem;"> Il y'a {{ message.created_at|timesince }} </p> <br>
+                                 </div>
+                            </div>
 
 
                     </div>
@@ -113,7 +123,7 @@
                             <p class="help-block text-danger"></p>
                         </div>
                         <div>
-                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Envoyer Message</button>
+                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Envoyer </button>
                         </div>
                     </form>
                 </div>

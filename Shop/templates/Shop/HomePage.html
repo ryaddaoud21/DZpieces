@@ -58,7 +58,7 @@
             </div>
             <div class="col-lg-3 col-6 text-right">
                 {% if request.user.is_authenticated %}
-                 <a href="{% url 'login' %}" class="btn border">
+                 <a href="{% url 'Profil' %}" class="btn border">
                     <i class="fas fa-user text-primary"></i>
                     <span class="badge">{{request.user}}</span>
                 </a>
@@ -160,7 +160,7 @@
                                 <div class="p-3" style="max-width: 700px;">
                                     <h4 class="text-light text-uppercase font-weight-medium mb-3">Vendez vos produits et montrez votre article ici</h4>
                                     <h3 class="display-4 text-white font-weight-semi-bold mb-4"> Montrez votre marchandise</h3>
-                                    <a href="" class="btn btn-light py-2 px-3">Publier votre produit </a>
+                                    <a href="{% url 'addproduct'%}" class="btn btn-light py-2 px-3">Publier votre produit </a>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +170,7 @@
                                 <div class="p-3" style="max-width: 700px;">
                                     <h4 class="text-light text-uppercase font-weight-medium mb-3">Voire les différentes offres et contacter nos clients</h4>
                                     <h3 class="display-4 text-white font-weight-semi-bold mb-4">Prix raisonnable</h3>
-                                    <a href="" class="btn btn-light py-2 px-3">Consulter la boutique</a>
+                                    <a href="{% url 'shop' %}" class="btn btn-light py-2 px-3">Consulter la boutique</a>
                                 </div>
                             </div>
                         </div>

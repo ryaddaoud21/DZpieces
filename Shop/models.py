@@ -4,7 +4,23 @@ from django.contrib.auth.models import User
 
 
 class Userprofile(models.Model):
-    user = models.OneToOneField(User,related_name='userprofile', on_delete=models.CASCADE)
+    user = models.OneToOneField(User,related_name='userprofile', on_delete=models.CASCADE,null=True)
+
+    CHOICES = (
+        ('Homme', 'Homme'),
+        ('Femme', 'Femme'),
+    )
+    user = models.ForeignKey(User, related_name='userprofile', on_delete=models.CASCADE, null=True)
+    name = models.CharField(max_length=50, null=True)
+    Sex = models.CharField(max_length=50, choices=CHOICES,null=True)
+    Phone = models.CharField(max_length=50,null=True)
+    Email = models.EmailField(max_length=200,null=True)
+    Address = models.CharField(max_length=200, null=True)
+    image =models.ImageField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
 
 User.userprofile = property(lambda u:Userprofile.objects.get_or_create(user=u)[0])
 
@@ -99,13 +115,6 @@ class Product(models.Model):
 
 
 
-class Customer(models.Model):
-    user = models.OneToOneField(User, null=True , blank=True , on_delete=models.CASCADE)
-    name = models.CharField(max_length=200 , null=True )
-    email = models.CharField( max_length=200)
-
-    def __str__(self):
-        return self.name
 
 
 

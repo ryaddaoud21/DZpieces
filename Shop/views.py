@@ -95,7 +95,8 @@ def Conversation(request,offer_id):
     brands = Brand.objects.all()
     product = Product.objects.all()
     offres= Offre.objects.all()
-    context = {'offer': offer ,'brands' : brands,'offres': offres,'product':product}
+    users= Userprofile.objects.all()
+    context = {'offer': offer ,'brands' : brands,'offres': offres,'product':product,'users':users}
     return render(request, 'Shop/conversation.html',context)
 
 @login_required
@@ -289,3 +290,9 @@ def offredetail(request,product_id):
 
 
 
+
+@login_required
+def Profil(request):
+    users =Userprofile.objects.all()
+    context = {'users':users}
+    return render(request,"Shop/Profil.html",context)

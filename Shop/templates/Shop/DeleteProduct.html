@@ -5,11 +5,11 @@
 
  <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 150px">
-            <h1 class="font-weight-semi-bold text-uppercase mb-3">Publier Une Annonce</h1>
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Supprimer Une Annonce</h1>
             <div class="d-inline-flex">
                 <p class="m-0"><a href="">Acceuil</a></p>
                 <p class="m-0 px-2">-</p>
-                <p class="m-0">Publier Une Annonce</p>
+                <p class="m-0">Supprimer Une Annonce</p>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
                     {% csrf_token %}
                     <div class="content">
 
-                    <input class="btn btn-danger py-2 px-4" type="submit" name="Confirm">
+                    <input class="btn btn-danger py-2 px-4" type="submit" name="Supprimer" value="Supprimer">
                         <a class="btn btn-primary py-2 px-4" href="{% url 'articlesarticles' %}" > Annuler</a> </div>
 
                     </div>
