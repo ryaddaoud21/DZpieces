@@ -30,8 +30,11 @@
                         {% for message in offer.conversationmessages.all %}
                         {% if message.created_by == request.user %}
                         <div class="d-flex justify-content-between">
-                            <span class="icon"><img width="35" src="https://i.postimg.cc/MnSTVw83/me.png"></span>
-
+                                {% for user in users %}
+                                {% if user.user ==  message.created_by  %}
+                                 <span class="icon"><img style="float:left;  border-radius: 50%;  padding: 5px ;width: 45px " src="{{user.image.url}}"></span>
+                                {% endif %}
+                                {% endfor %}
                             <p>{{message.offer.created_by}} / {{message.offer.produit}} </p>
                         <a href="" class="btn border">
 
@@ -62,7 +65,7 @@
                             <div>
                                 {% for user in users %}
                                 {% if user.user == request.user %}
-                                 <span class="icon"><img style="float:left;  padding: 5px ;width: 45px " src="{{user.image.url}}"></span>
+                                 <span class="icon"><img style="float:left;  border-radius: 50%;  padding: 5px ;width: 45px " src="{{user.image.url}}"></span>
                                 {% endif %}
                                 {% endfor %}
                                  <div>
@@ -91,11 +94,11 @@
                                <div>
                                 {% for user in users %}
                                 {% if user.user == message.created_by %}
-                                 <span class="icon"><img style="float:left;  padding: 5px ;width: 45px " src="{{user.image.url}}"></span>
+                                 <span class="icon"><img style="float:left;  border-radius: 50%; padding: 5px ;width: 45px "  src="{{user.image.url}}"></span>
                                 {% endif %}
                                {% endfor %}
 
-                                 <span class="icon"><img style="float:left;  padding: 5px ;width: 45px " src="https://i.postimg.cc/PCQqM7XX/she.png"></span>
+                                 <span class="icon"><img style="float:left; border-radius: 50%;  padding: 5px ;width: 45px " src="https://i.postimg.cc/PCQqM7XX/she.png"></span>
                                  <div>
                                  <b>{{ message.created_by.username }}</b>  <br>  <p style=" font-weight: 200;font-size: 0.8rem;"> Il y'a {{ message.created_at|timesince }} </p> <br>
                                  </div>

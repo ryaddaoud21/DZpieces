@@ -1,3 +1,5 @@
+import os
+
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import render ,redirect
@@ -55,6 +57,8 @@ def filter(request):
 
 
 def homepage(request):
+
+
     brands = Brand.objects.all()
     catalogues = Catalogue.objects.all()
     products = Product.objects.all()
@@ -296,3 +300,11 @@ def Profil(request):
     users =Userprofile.objects.all()
     context = {'users':users}
     return render(request,"Shop/Profil.html",context)
+
+from django.dispatch import receiver
+from django.db.models.signals import (post_save,)
+@receiver(post_save, sender=User)
+def lost_post_save(sender, instance, created , *args, **kwargs):
+
+    if created:
+        account = Userprofile.objects.create(user=instance,name=instance.username)
