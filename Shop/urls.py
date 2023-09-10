@@ -5,6 +5,9 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from .views import *
 
+
+
+
 urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='Shop/Login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
@@ -27,5 +30,8 @@ urlpatterns = [
     path('Conversation/<int:offer_id>/', Conversation, name='Conversation'),
     path('<int:product_id>/modifier', Modifyproduct, name='Modifyproduct'),
     path('<int:product_id>/Supprimer', Deleteproduct, name='Deleteproduct'),
+    path('joueur/',function,name='fonction'),
+    
+
 ]
 

@@ -58,7 +58,6 @@ def filter(request):
 
 def homepage(request):
 
-
     brands = Brand.objects.all()
     catalogues = Catalogue.objects.all()
     products = Product.objects.all()
@@ -67,6 +66,20 @@ def homepage(request):
 
     context = {'filter':filter,'brands' : brands,'catalogues':catalogues,'products':products}
     return render(request, 'Shop/HomePage.html',context)
+
+def annaba(request):
+    return render(request, 'Shop/HomePage.html')
+
+
+
+def function(request):
+    x = Joueur.objects.all()
+    context = {'y': x}
+    return render(request, 'Shop/Joueur.html',context)
+
+
+
+
 
 def brandspage(request):
     brands = Brand.objects.all()
@@ -305,6 +318,7 @@ from django.dispatch import receiver
 from django.db.models.signals import (post_save,)
 @receiver(post_save, sender=User)
 def lost_post_save(sender, instance, created , *args, **kwargs):
-
     if created:
         account = Userprofile.objects.create(user=instance,name=instance.username)
+
+

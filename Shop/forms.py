@@ -12,6 +12,9 @@ class ProductForm(forms.ModelForm):
         fields = '__all__'
         exclude = ('by',)
 
+
+
+
 class OfferForm(forms.ModelForm):
     class Meta:
         model = Offre

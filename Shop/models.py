@@ -73,7 +73,8 @@ class Catalogue(models.Model):
         return total_cata
 
 
-#product Model
+
+
 
 class Product(models.Model):
     by = models.ForeignKey('auth.user', on_delete=models.SET_NULL, null=True, blank=True, )
@@ -120,7 +121,6 @@ class Product(models.Model):
 
 
 
-
 class Offre(models.Model):
     produit = models.ForeignKey(Product ,related_name='offre', on_delete=models.CASCADE,blank=True , null=True)
     created_by = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
@@ -142,3 +142,8 @@ class ConversationMessage(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     class Meta:
         ordering = ['created_at']
+
+
+class Joueur(models.Model):
+    nom = models.CharField(max_length=200 , null=True , blank=True)
+    dossard = models.CharField(max_length=200 , null=True , blank=True)
