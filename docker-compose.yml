@@ -3,9 +3,22 @@ version: '3'
 services:
   web:
     build:
-      context: ./  # Le chemin vers le répertoire de votre projet Django
-      dockerfile: dockerfile  # Nom de votre Dockerfile
+      context: .
+      dockerfile: dockerfile
+    image: daoudryad/dz-pieces-image
     ports:
-      - "8000:8000"  # Mappez le port du conteneur à l'hôte
-    environment:
-      - DEBUG=True  # Configurez les variables d'environnement si nécessaire
+      - "8008:8008"
+    volumes:
+      - .:/app
+    command: python manage.py runserver 0.u b0.0.0:8008
+
+
+
+
+
+
+
+
+
+
+
