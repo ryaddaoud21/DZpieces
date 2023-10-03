@@ -21,21 +21,89 @@
         <div class="text-center mb-4">
             <h2 class="section-title px-5"><span class="px-2">Ajouter Un Produit </span></h2>
         </div>
-        <div class="row justify-content-md-center " style="    text-align: center;        ">
-            <div class="col-4 mb-5">
-                <div class="contact-form">
-                    <div id="success"></div>
-                    <form   method="post" enctype="multipart/form-data" action="{% url 'addproduct'  %}" >
-                        {% csrf_token%}
-                         {{ form|crispy }}
+        <div class="row justify-content-md-center">
+    <div class="col-8 mb-5">
+        <div class="card">
+            <div class="card-body">
+                <div id="success"></div>
+                   <form method="post" enctype="multipart/form-data" action="{% url 'addproduct' %}">
+        {% csrf_token %}
+         <div class="form-group">
+            <input type="file" class="custom-file-input" id="{{ form.image.id_for_label }}" name="{{ form.image.name }}" required>
+            <label style="    margin: 1pc 15pc 0 15pc;" class="custom-file-label" for="{{ form.image.id_for_label }}">Choisissez un fichier</label>
+        </div>
 
-                        <div>
-                            <button class="btn btn-primary py-2 px-4" type="submit" > Publier </button>
-                        </div>
-                    </form>
+        <div class="form-group">
+            <label for="{{ form.name.id_for_label }}">Nom du Produit</label>
+            <input type="text" class="form-control custom-input" id="{{ form.name.id_for_label }}" name="{{ form.name.name }}" placeholder="Entrez le nom du produit" required>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="id_catalog">Catalogue</label>
+                    <select class="form-control custom-select" id="id_catalog" name="catalog">
+                        {% for catalog in catalogues %}
+                            <option value="{{ catalog.id }}">{{ catalog.title }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
             </div>
+         <div class="form-group">
+            <label for="id_brand">Marque</label>
+            <select class="form-control custom-select" id="id_brand" name="brand">
+                {% for brand in brands %}
+                    <option value="{{ brand.id }}">{{ brand.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        </div>
 
+        <div class="form-row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="{{ form.price.id_for_label }}">Prix</label>
+                    <input type="number" class="form-control custom-input" id="{{ form.price.id_for_label }}" name="{{ form.price.name }}" placeholder="Entrez le prix" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="{{ form.Product_details.id_for_label }}">Détails du Produit</label>
+                    <textarea class="form-control custom-input" id="{{ form.Product_details.id_for_label }}" name="{{ form.Product_details.name }}" rows="4" placeholder="Entrez les détails du produit" required></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="{{ form.Téléphone.id_for_label }}">Téléphone</label>
+                    <input type="tel" class="form-control custom-input" id="{{ form.Téléphone.id_for_label }}" name="{{ form.Téléphone.name }}" placeholder="Entrez le numéro de téléphone" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="{{ form.Addresse.id_for_label }}">Adresse</label>
+                    <input type="text" class="form-control custom-input" id="{{ form.Addresse.id_for_label }}" name="{{ form.Addresse.name }}" placeholder="Entrez l'adresse" required>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="form-group text-center"> <!-- Ajoutez la classe "text-center" pour centrer le bouton -->
+            <button type="submit" class="btn btn-primary btn-lg">Publier</button> <!-- Ajoutez la classe "btn-lg" pour agrandir le bouton -->
+        </div>
+                   </form>
+            </div>
         </div>
     </div>
+</div>
+
+    </div>
+
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 {% endblock content %}

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'graphene_django',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'  # Use the Bootstrap 4 template pack
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'

@@ -142,8 +142,3 @@ class ConversationMessage(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     class Meta:
         ordering = ['created_at']
-
-
-class Joueur(models.Model):
-    nom = models.CharField(max_length=200 , null=True , blank=True)
-    dossard = models.CharField(max_length=200 , null=True , blank=True)
