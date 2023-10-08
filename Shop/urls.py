@@ -30,8 +30,7 @@ urlpatterns = [
     path('Conversation/<int:offer_id>/', Conversation, name='Conversation'),
     path('<int:product_id>/modifier', Modifyproduct, name='Modifyproduct'),
     path('<int:product_id>/Supprimer', Deleteproduct, name='Deleteproduct'),
-    path('joueur/',function,name='fonction'),
-    
+
 
 ]
 

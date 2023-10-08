@@ -72,11 +72,6 @@ def annaba(request):
 
 
 
-def function(request):
-    x = Joueur.objects.all()
-    context = {'y': x}
-    return render(request, 'Shop/Joueur.html',context)
-
 
 
 
